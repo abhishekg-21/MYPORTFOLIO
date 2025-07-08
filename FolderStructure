@@ -1,0 +1,56 @@
+abhishek-portfolio/
+├── node_modules/          // Installed packages
+├── public/
+│   ├── index.html         // Main HTML file where React app mounts
+│   ├── favicon.ico        // Website favicon
+│   └── logo.png           // Site logo (if any)
+├── src/
+│   ├── assets/
+│   │   ├── images/        // Project screenshots, icons for skills/tools
+│   │   └── fonts/         // Inter, Poppins font files (if self-hosting, otherwise linked from Google Fonts)
+│   ├── components/        // Reusable, generic UI components
+│   │   ├── Layout/        // Contains common layout elements (Navbar, Footer)
+│   │   │   ├── Navbar.tsx
+│   │   │   └── Footer.tsx
+│   │   ├── Button/        // Generic Button component (e.g., primary, secondary styles)
+│   │   │   └── Button.tsx
+│   │   ├── Card/          // Generic Card component for projects or certifications
+│   │   │   └── Card.tsx
+│   │   ├── Icon/          // Wrapper for icons (e.g., using React Icons or SVG assets)
+│   │   │   └── Icon.tsx
+│   │   ├── ToggleSwitch/  // Dark/Light mode toggle switch
+│   │   │   └── ToggleSwitch.tsx
+│   │   └── ScrollToTop/   // Optional: Button to scroll to top
+│   │       └── ScrollToTop.tsx
+│   ├── data/              // Centralized data for easy management (TypeScript interfaces recommended)
+│   │   ├── types.ts       // Interface definitions for Project, Skill, Certification, etc.
+│   │   ├── projects.ts    // Array of project objects, typed with interfaces
+│   │   ├── skills.ts      // Array of skill objects, typed
+│   │   ├── certifications.ts // Array of certification objects, typed
+│   │   └── socialLinks.ts // Links for social media, typed
+│   ├── hooks/             // Custom React Hooks
+│   │   └── useThemeToggle.ts // Hook for managing theme state
+│   │   └── useScrollDirection.ts // Optional: for sticky/hiding navbar on scroll
+│   ├── context/           // React Context for global state
+│   │   └── ThemeContext.tsx // Manages dark/light mode state (TSX as it uses React)
+│   ├── pages/             // Top-level components for each route/page
+│   │   ├── Home.tsx       // Contains Hero, About, Skills sections
+│   │   ├── ProjectsPage.tsx // Displays all projects
+│   │   ├── CertificationsPage.tsx // Displays all certifications & education
+│   │   └── ContactPage.tsx  // Contains contact form and info
+│   ├── styles/            // Global styles and theme configuration
+│   │   ├── index.css      // Tailwind CSS imports, base styles, global overrides
+│   │   ├── theme.ts       // TS file for theme config (colors, fonts, breakpoints if JS accessible)
+│   │   └── utilities.css  // Any custom utility classes not handled by Tailwind
+│   ├── App.tsx            // Main application component, handles routing
+│   ├── index.tsx          // React DOM rendering entry point
+│   ├── react-app-env.d.ts // CRA TypeScript declaration file
+│   └── setupTests.ts      // CRA testing setup file
+├── .env.local             // Environment variables (e.g., for contact form API key, if needed)
+├── .gitignore             // Git ignore file
+├── package.json           // Project dependencies and scripts
+├── package-lock.json      // Exact dependency tree
+├── postcss.config.js      // PostCSS configuration
+├── README.md              // Project documentation
+├── tailwind.config.js     // Tailwind CSS configuration (colors, fonts, breakpoints, dark mode)
+└── tsconfig.json          // TypeScript compiler configuration
