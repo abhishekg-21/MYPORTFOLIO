@@ -1,47 +1,29 @@
+// src/component/ToggleSwitch/ToggleSwitch.tsx
 import React from "react";
+import { useTheme } from "../../context/ThemeContext"; // Assuming this is where your theme context is
 
-// Define the props interface for the ToggleSwitch component
 interface ToggleSwitchProps {
-  isActive: boolean; // Determines if the switch is in the 'on' (dark) state
-  onToggle: () => void; // Function to call when the switch is toggled
-  className?: string; // Optional: for adding extra Tailwind classes from parent
+  className?: string; // To allow passing additional Tailwind classes
 }
 
-const ToggleSwitch: React.FC<ToggleSwitchProps> = ({
-  isActive,
-  onToggle,
-  className,
-}) => {
+const ToggleSwitch: React.FC<ToggleSwitchProps> = ({ className }) => {
+  const { theme, toggleTheme } = useTheme();
+
   return (
     <button
-      type="button"
-      onClick={onToggle}
-      // Combine base classes with any additional classes passed via props
-      className={`
-        relative inline-flex h-6 w-11 items-center rounded-full
-        transition-colors duration-300 ease-in-out
-        ${isActive ? "bg-accent-500" : "bg-gray-200 dark:bg-gray-700"}
-        focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500
-        ${className || ""}
-      `}
-      role="switch"
-      aria-checked={isActive}
+      onClick={toggleTheme}
+      className={`relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500 ${className}
+        ${theme === "dark" ? "bg-accent-500" : "bg-gray-200 dark:bg-gray-700"}`}
+      aria-pressed={theme === "dark"}
       aria-label="Toggle dark mode"
     >
-      {/* Visually hidden span for accessibility (screen readers) */}
-      <span className="sr-only">Toggle dark mode</span>
-
-      {/* The movable circle/thumb of the switch */}
       <span
-        className={`
-          inline-block h-4 w-4 transform rounded-full bg-white shadow-lg
-          transition-transform duration-300 ease-in-out
-          ${isActive ? "translate-x-6" : "translate-x-1"}
-        `}
-        aria-hidden="true" // Hide from screen readers as parent button is accessible
-      />
+        aria-hidden="true"
+        className={`pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200
+          ${theme === "dark" ? "translate-x-5" : "translate-x-0"}`}
+      ></span>
     </button>
   );
 };
 
-export default ToggleSwitch;
+export default ToggleSwitch; // ENSURE this is a DEFAULT export

@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+<<<<<<< HEAD
 /*
   Global Styles & Overrides
   - Use these sparingly, prefer Tailwind classes directly in components.
@@ -38,4 +39,32 @@ html {
   --scroll-track-bg: #2d3748; /* Darker track */
   --scroll-thumb-bg: #4a5568; /* Darker thumb */
   --scroll-thumb-hover-bg: #718096; /* Darker thumb hover */
+=======
+/* Optional: Define scrollbar styles for a smoother look */
+body {
+  scroll-behavior: smooth;
+  /* Customize scrollbar for webkit browsers */
+  scrollbar-width: thin; /* "auto" or "thin" */
+  scrollbar-color: #3b82f6 #1f2937; /* thumb color track color */
+}
+
+body::-webkit-scrollbar {
+  width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+  background: #1f2937; /* Dark track for dark mode */
+}
+.dark body::-webkit-scrollbar-track {
+  background: #111827; /* Even darker track in dark mode */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #3b82f6; /* Accent color thumb */
+  border-radius: 20px;
+  border: 3px solid #1f2937; /* Border matching track color */
+}
+.dark body::-webkit-scrollbar-thumb {
+  border: 3px solid #111827;
+>>>>>>> 2786866 (Descriptive message about your changes)
 }
