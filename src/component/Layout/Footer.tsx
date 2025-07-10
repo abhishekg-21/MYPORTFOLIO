@@ -1,11 +1,5 @@
 import React from "react";
-<<<<<<< HEAD
-// import { Link } from "react-router-dom";
-// Import GitHub icon from @heroicons/react (make sure you have them installed)
-import { SocialIcon } from "react-social-icons"; // A popular library for social media icons
-=======
 // import { Link } from "react-router-dom"; // Only if you plan to use Link in footer
->>>>>>> 2786866 (Descriptive message about your changes)
 
 const Footer: React.FC = () => {
   return (
