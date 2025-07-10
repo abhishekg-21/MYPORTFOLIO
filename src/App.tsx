@@ -13,15 +13,11 @@ import ProjectsPage from "./pages/ProjectsPage";
 import CertificationsPage from "./pages/CertificationsPage";
 import ContactPage from "./pages/ContactPage";
 
-<<<<<<< HEAD
-// Component to apply theme classes to the body based on context
-=======
 // Import global styles (if you have them)
 import "./App.css"; // Keep if you have global app-wide CSS
 import "./index.css"; // Keep if this is your main Tailwind CSS import
 // ... (imports remain the same as your last provided App.tsx)
 
->>>>>>> 2786866 (Descriptive message about your changes)
 const ThemeWrapper: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {

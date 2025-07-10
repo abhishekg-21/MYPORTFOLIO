@@ -2,44 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-<<<<<<< HEAD
-/*
-  Global Styles & Overrides
-  - Use these sparingly, prefer Tailwind classes directly in components.
-  - Good for custom scrollbars, default link styles, etc.
-*/
-
-/* Smooth scroll for anchor links */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Optional: Custom scrollbar styles for a cleaner look */
-/* For WebKit browsers (Chrome, Safari) */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--scroll-track-bg, #f1f1f1); /* Light mode default */
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--scroll-thumb-bg, #888); /* Light mode default */
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--scroll-thumb-hover-bg, #555); /* Light mode default */
-}
-
-/* Dark mode scrollbar variables */
-.dark body {
-  --scroll-track-bg: #2d3748; /* Darker track */
-  --scroll-thumb-bg: #4a5568; /* Darker thumb */
-  --scroll-thumb-hover-bg: #718096; /* Darker thumb hover */
-=======
 /* Optional: Define scrollbar styles for a smoother look */
 body {
   scroll-behavior: smooth;
@@ -66,5 +28,4 @@ body::-webkit-scrollbar-thumb {
 }
 .dark body::-webkit-scrollbar-thumb {
   border: 3px solid #111827;
->>>>>>> 2786866 (Descriptive message about your changes)
 }
