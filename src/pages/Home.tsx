@@ -3,9 +3,10 @@ import Button from "../component/Button/Button";
 import Card from "../component/Card/Card";
 import { SocialIcon } from "react-social-icons";
 import socialLinks from "../data/socialLinks";
-import skills from "../data/skills"; // Import skills data
-import { ISkill } from "../data/types"; // Import ISkill interface for typing
+import skills from "../data/skills";
+import { ISkill } from "../data/types";
 import { motion, Variants } from "framer-motion";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 // Animation variants (ensure Variants is imported from 'framer-motion')
 const sectionVariants: Variants = {
@@ -28,9 +29,12 @@ const itemVariants: Variants = {
 };
 
 const Home: React.FC = () => {
+  const navigate = useNavigate(); // Initialize useNavigate hook
+
   const handleGetInTouch = () => {
-    // Implement actual navigation or modal logic here
-    console.log("Navigating to contact or opening contact form...");
+    navigate("/contact"); // Navigate to the /contact route
+    // You can add a console.log here for debugging if needed:
+    // console.log("Navigating to contact page...");
   };
 
   const handleDownloadCV = () => {
@@ -168,22 +172,16 @@ const Home: React.FC = () => {
             My Skills
           </motion.h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8">
-            {" "}
-            {/* Responsive grid for skills */}
             {Object.keys(categorizedSkills).map((category) => (
               <motion.div
                 key={category}
                 variants={itemVariants}
                 className="col-span-full sm:col-span-1 lg:col-span-1"
               >
-                {" "}
-                {/* Ensure categories distribute well */}
                 <h3 className="text-xl sm:text-2xl font-heading font-semibold text-accent-500 mb-4">
                   {category}
                 </h3>
                 <div className="flex flex-wrap justify-center gap-4">
-                  {" "}
-                  {/* Flex wrap for skill items within category */}
                   {categorizedSkills[category].map((skill) => (
                     <div
                       key={skill.id}
