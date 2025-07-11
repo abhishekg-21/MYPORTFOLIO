@@ -1,27 +1,23 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline"; // For mobile menu icon
-import ToggleSwitch from "../ToggleSwitch/ToggleSwitch"; // Assuming this handles theme toggle
-import { useScrollDirection } from "../../hooks/useScrollDirection"; // Custom hook for scroll direction
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch"; //
+// import { useScrollDirection } from "../../hooks/useScrollDirection"; // REMOVE this import
 
 const Navbar: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false); // State for mobile menu visibility
-  const scrollDirection = useScrollDirection(); // Get scroll direction for dynamic navbar
+  const [isOpen, setIsOpen] = useState(false);
+  // const scrollDirection = useScrollDirection(); // REMOVE this line
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
   return (
-    // Navbar container: Fixed at top, dynamic background based on scroll
+    // Navbar container: Fixed at top, always visible
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrollDirection === "down" ? "-translate-y-full" : "translate-y-0"
-      } ${
-        scrollDirection === "none"
-          ? "bg-transparent" // Transparent at top
-          : "bg-light-card/90 dark:bg-dark-card/90 shadow-md backdrop-blur-sm" // Opaque with blur on scroll
-      } border-b border-light-border dark:border-dark-border`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300
+        bg-light-card dark:bg-dark-card shadow-md backdrop-blur-sm
+        border-b border-light-border dark:border-dark-border`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
         {/* Logo/Brand */}
@@ -58,18 +54,15 @@ const Navbar: React.FC = () => {
           >
             Contact
           </Link>
-          <ToggleSwitch /> {/* Theme toggle for desktop */}
+          <ToggleSwitch />
         </div>
 
         {/* Mobile Menu Button (Hamburger) and Toggle Switch */}
         <div className="md:hidden flex items-center space-x-4">
-          {" "}
-          {/* Added space-x-4 for spacing */}
-          <ToggleSwitch className="flex-shrink-0" />{" "}
-          {/* Theme toggle for mobile */}
+          <ToggleSwitch className="flex-shrink-0" />
           <button
             onClick={toggleMenu}
-            className="text-light-text dark:text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-500 rounded p-1" // Added padding to button
+            className="text-light-text dark:text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-500 rounded p-1"
             aria-label="Toggle mobile menu"
           >
             {isOpen ? (
@@ -88,32 +81,31 @@ const Navbar: React.FC = () => {
             <Link
               to="/"
               className="text-light-text dark:text-dark-text hover:text-accent-500 transition-colors duration-200 text-lg font-medium py-2 w-full text-center"
-              onClick={toggleMenu} // Close menu on click
+              onClick={toggleMenu}
             >
               Home
             </Link>
             <Link
               to="/projects"
               className="text-light-text dark:text-dark-text hover:text-accent-500 transition-colors duration-200 text-lg font-medium py-2 w-full text-center"
-              onClick={toggleMenu} // Close menu on click
+              onClick={toggleMenu}
             >
               Projects
             </Link>
             <Link
               to="/certifications"
               className="text-light-text dark:text-dark-text hover:text-accent-500 transition-colors duration-200 text-lg font-medium py-2 w-full text-center"
-              onClick={toggleMenu} // Close menu on click
+              onClick={toggleMenu}
             >
               Certifications
             </Link>
             <Link
               to="/contact"
               className="text-light-text dark:text-dark-text hover:text-accent-500 transition-colors duration-200 text-lg font-medium py-2 w-full text-center"
-              onClick={toggleMenu} // Close menu on click
+              onClick={toggleMenu}
             >
               Contact
             </Link>
-            {/* The ToggleSwitch is already outside the mobile menu dropdown for better visibility and access */}
           </div>
         </div>
       )}
