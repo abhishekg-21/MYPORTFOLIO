@@ -18,7 +18,7 @@ const projects: IProject[] = [
     ],
     githubLink: "https://github.com/abhishekg-21", // Replace with actual GitHub link
     liveDemoLink: "https://e-shop-frontend-eta.vercel.app/", // Replace with actual live demo link (if exists)
-    image: "C:Usersabhisabhishek-portfoliosrcdataE-Shop.png", // Path to project screenshot
+    image: "srcdataE-Shop.png", // Path to project screenshot
   },
   {
     id: "qr-code-lms-module",
@@ -36,7 +36,7 @@ const projects: IProject[] = [
     ],
     githubLink: "https://github.com/abhishekg-21", // Replace with actual GitHub link
     liveDemoLink: "https://scans-gold.vercel.app/", // Replace with actual live demo link (if exists)
-    image: "C:Usersabhisabhishek-portfoliosrcdataLMS.png", // Path to project screenshot
+    image: "srcdataLMS.png", // Path to project screenshot
   },
   // Add more projects as Abhishek develops them
   // {
