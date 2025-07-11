@@ -8,13 +8,26 @@ const skills: ISkill[] = [
     id: "java",
     name: "Java",
     category: "Languages",
-    icon: "/assets/icons/java.svg",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg",
+  },
+  {
+    id: "html",
+    name: "HTML5", // Often referred to as HTML5
+    category: "Languages",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original-wordmark.svg", // You'll need to add an HTML icon in public/assets/icons/
+    // Or 'Frontend', or 'Web Fundamentals'
+  },
+  {
+    id: "css",
+    name: "CSS3", // Often referred to as CSS3
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original-wordmark.svg", // You'll need to add a CSS icon in public/assets/icons/
+    category: "Languages", // Or 'Frontend', or 'Web Fundamentals'
   },
   {
     id: "javascript",
     name: "JavaScript",
     category: "Languages",
-    icon: "/assets/icons/javascript.svg",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
   },
   {
     id: "sql",
