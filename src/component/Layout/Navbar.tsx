@@ -1,23 +1,30 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import ToggleSwitch from "../ToggleSwitch/ToggleSwitch"; //
-// import { useScrollDirection } from "../../hooks/useScrollDirection"; // REMOVE this import
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch"; // Assuming this handles theme toggle
+import { useScrollDirection } from "../../hooks/useScrollDirection"; // Custom hook for scroll direction
 
 const Navbar: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  // const scrollDirection = useScrollDirection(); // REMOVE this line
+  const [isOpen, setIsOpen] = useState(false); // State for mobile menu visibility
+  const scrollDirection = useScrollDirection(); // Get scroll direction for dynamic navbar
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
   return (
-    // Navbar container: Fixed at top, always visible
+    // Navbar container: Fixed at top, dynamic background based on scroll
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300
-        bg-light-card dark:bg-dark-card shadow-md backdrop-blur-sm
-        border-b border-light-border dark:border-dark-border`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        // Conditional class for hiding/showing on scroll (if you want this behavior back)
+        // For 'never move', simply remove this line:
+        scrollDirection === "down" ? "-translate-y-full" : "translate-y-0"
+      } ${
+        // Conditional background: transparent at top, opaque with blur on scroll
+        scrollDirection === "none"
+          ? "bg-transparent" // Transparent when not scrolled
+          : "bg-light-card/90 dark:bg-dark-card/90 shadow-md backdrop-blur-sm" // Opaque with blur on scroll
+      } border-b border-light-border dark:border-dark-border`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
         {/* Logo/Brand */}
@@ -54,12 +61,13 @@ const Navbar: React.FC = () => {
           >
             Contact
           </Link>
-          <ToggleSwitch />
+          <ToggleSwitch /> {/* Theme toggle for desktop */}
         </div>
 
         {/* Mobile Menu Button (Hamburger) and Toggle Switch */}
         <div className="md:hidden flex items-center space-x-4">
-          <ToggleSwitch className="flex-shrink-0" />
+          <ToggleSwitch className="flex-shrink-0" />{" "}
+          {/* Theme toggle for mobile */}
           <button
             onClick={toggleMenu}
             className="text-light-text dark:text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-500 rounded p-1"
