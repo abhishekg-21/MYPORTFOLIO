@@ -3,62 +3,105 @@ import Button from "../component/Button/Button";
 import Card from "../component/Card/Card";
 import { SocialIcon } from "react-social-icons";
 import socialLinks from "../data/socialLinks";
+import skills from "../data/skills"; // Import skills data
+import { ISkill } from "../data/types"; // Import ISkill interface for typing
+import { motion, Variants } from "framer-motion";
+
+// Animation variants (ensure Variants is imported from 'framer-motion')
+const sectionVariants: Variants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: "easeOut",
+      when: "beforeChildren",
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+};
 
 const Home: React.FC = () => {
-  // Define a dummy function for button click, replace with actual logic (e.g., smooth scroll, modal)
   const handleGetInTouch = () => {
-    // Example: Scroll to the contact section or navigate to /contact
+    // Implement actual navigation or modal logic here
     console.log("Navigating to contact or opening contact form...");
-    // You might use react-router-dom's useNavigate hook here to go to /contact
-    // import { useNavigate } from 'react-router-dom';
-    // const navigate = useNavigate();
-    // navigate('/contact');
   };
 
   const handleDownloadCV = () => {
-    // Example: Trigger download of a resume PDF
-    const resumeUrl = "/assets/Abhishek_Gupta_Resume.pdf"; // Ensure this path is correct in your public folder
+    const resumeUrl = "/assets/Abhishek_Gupta_Resume.pdf";
     window.open(resumeUrl, "_blank");
   };
+
+  // Group skills by category for display
+  const categorizedSkills = skills.reduce((acc, skill) => {
+    (acc[skill.category] = acc[skill.category] || []).push(skill);
+    return acc;
+  }, {} as Record<string, ISkill[]>);
 
   return (
     <div className="flex flex-col items-center py-16 sm:py-24 md:py-32">
       {/* Hero Section */}
-      <section className="text-center mb-16 px-4">
+      <motion.section
+        className="text-center mb-16 px-4"
+        initial="hidden"
+        animate="visible"
+        variants={sectionVariants}
+      >
         {/* Profile Picture */}
-        <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden mx-auto mb-8 shadow-xl border-4 border-accent-500 dark:border-accent-600 transition-all duration-300 transform hover:scale-105">
+        <motion.div
+          className="w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden mx-auto mb-8 shadow-xl border-4 border-accent-500 dark:border-accent-600 transition-all duration-300 transform hover:scale-105"
+          variants={itemVariants}
+        >
           <img
             src="/assets/profile_pic.jpg" // CHANGE THIS TO YOUR ACTUAL PROFILE PICTURE PATH
             alt="Abhishek Gupta"
             className="w-full h-full object-cover"
           />
-        </div>
+        </motion.div>
 
         {/* Headline */}
-        <h1 className="text-4xl sm:text-5xl lg:text-7xl font-heading font-extrabold mb-4 leading-tight text-light-text dark:text-dark-text animate-fade-in-down">
+        <motion.h1
+          className="text-4xl sm:text-5xl lg:text-7xl font-heading font-extrabold mb-4 leading-tight text-light-text dark:text-dark-text"
+          variants={itemVariants}
+        >
           Hi, I'm <span className="text-accent-500">Abhishek Gupta</span>
-        </h1>
-        <p className="text-lg sm:text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-10 max-w-3xl mx-auto animate-fade-in">
+        </motion.h1>
+        <motion.p
+          className="text-lg sm:text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-10 max-w-3xl mx-auto"
+          variants={itemVariants}
+        >
           A passionate{" "}
           <span className="font-semibold text-accent-500">
             Full Stack Developer
           </span>{" "}
           with a knack for building beautiful, efficient, and user-friendly web
           applications.
-        </p>
+        </motion.p>
 
         {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-12 animate-fade-in-up">
+        <motion.div
+          className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-12"
+          variants={itemVariants}
+        >
           <Button variant="primary" size="lg" onClick={handleGetInTouch}>
             Get in Touch
           </Button>
           <Button variant="outline" size="lg" onClick={handleDownloadCV}>
             Download CV
           </Button>
-        </div>
+        </motion.div>
 
         {/* Social Links */}
-        <div className="flex justify-center space-x-6 animate-fade-in">
+        <motion.div
+          className="flex justify-center space-x-6"
+          variants={itemVariants}
+        >
           {socialLinks.map((link) => (
             <SocialIcon
               key={link.name}
@@ -66,52 +109,104 @@ const Home: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="transition-transform duration-200 hover:scale-125 hover:shadow-lg rounded-full"
-              style={{ height: 48, width: 48 }} // Increased size for better visibility
+              style={{ height: 48, width: 48 }}
             />
           ))}
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
       {/* About Section */}
-      <section className="w-full max-w-5xl px-4 mt-16 sm:mt-24">
+      <motion.section
+        className="w-full max-w-5xl px-4 mt-16 sm:mt-24"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={sectionVariants}
+      >
         <Card className="text-left">
-          <h2 className="text-3xl sm:text-4xl font-heading font-bold text-accent-500 mb-6 border-b-2 border-accent-500 pb-2 inline-block">
+          <motion.h2
+            className="text-3xl sm:text-4xl font-heading font-bold text-accent-500 mb-6 border-b-2 border-accent-500 pb-2 inline-block"
+            variants={itemVariants}
+          >
             About Me
-          </h2>
-          <p className="text-lg sm:text-xl text-light-text dark:text-gray-300 leading-relaxed mb-4">
+          </motion.h2>
+          <motion.p
+            className="text-lg sm:text-xl text-light-text dark:text-gray-300 leading-relaxed mb-4"
+            variants={itemVariants}
+          >
             I'm a dedicated and enthusiastic computer applications student with
             a strong foundation in web development technologies. My journey into
             full-stack development has equipped me with skills in both front-end
             (React, HTML, CSS, JavaScript) and back-end (Node.js, Express,
             databases) development.
-          </p>
-          <p className="text-lg sm:text-xl text-light-text dark:text-gray-300 leading-relaxed">
+          </motion.p>
+          <motion.p
+            className="text-lg sm:text-xl text-light-text dark:text-gray-300 leading-relaxed"
+            variants={itemVariants}
+          >
             I thrive on turning ideas into reality through clean, efficient, and
             user-friendly code. I am always eager to learn new technologies and
             improve my craft, constantly seeking opportunities to contribute to
             innovative projects and grow as a developer.
-          </p>
+          </motion.p>
         </Card>
-      </section>
+      </motion.section>
 
-      {/* Optional: Skills Section - Using Card for structure */}
-      {/*
-      <section className="w-full max-w-5xl px-4 mt-16 sm:mt-24">
+      {/* Skills Section */}
+      <motion.section
+        className="w-full max-w-5xl px-4 mt-16 sm:mt-24"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={sectionVariants}
+      >
         <Card className="text-center">
-          <h2 className="text-3xl sm:text-4xl font-heading font-bold text-accent-500 mb-6 border-b-2 border-accent-500 pb-2 inline-block">
+          <motion.h2
+            className="text-3xl sm:text-4xl font-heading font-bold text-accent-500 mb-6 border-b-2 border-accent-500 pb-2 inline-block"
+            variants={itemVariants}
+          >
             My Skills
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            {skills.map((skill) => ( // Assuming 'skills' data is imported
-              <div key={skill.id} className="flex flex-col items-center text-light-text dark:text-dark-text">
-                <img src={skill.icon} alt={skill.name} className="w-16 h-16 mb-2" />
-                <span className="text-lg font-medium">{skill.name}</span>
-              </div>
+          </motion.h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8">
+            {" "}
+            {/* Responsive grid for skills */}
+            {Object.keys(categorizedSkills).map((category) => (
+              <motion.div
+                key={category}
+                variants={itemVariants}
+                className="col-span-full sm:col-span-1 lg:col-span-1"
+              >
+                {" "}
+                {/* Ensure categories distribute well */}
+                <h3 className="text-xl sm:text-2xl font-heading font-semibold text-accent-500 mb-4">
+                  {category}
+                </h3>
+                <div className="flex flex-wrap justify-center gap-4">
+                  {" "}
+                  {/* Flex wrap for skill items within category */}
+                  {categorizedSkills[category].map((skill) => (
+                    <div
+                      key={skill.id}
+                      className="flex flex-col items-center p-3 rounded-lg bg-light-bg dark:bg-dark-bg transition-all duration-200 hover:scale-105 hover:shadow-md cursor-default border border-light-border dark:border-dark-border w-24 h-24 sm:w-28 sm:h-28 justify-center"
+                    >
+                      {skill.icon && (
+                        <img
+                          src={skill.icon}
+                          alt={skill.name}
+                          className="w-10 h-10 sm:w-12 sm:h-12 mb-2 object-contain"
+                        />
+                      )}
+                      <span className="text-sm sm:text-base font-medium text-light-text dark:text-dark-text text-center">
+                        {skill.name}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
             ))}
           </div>
         </Card>
-      </section>
-      */}
+      </motion.section>
     </div>
   );
 };

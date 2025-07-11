@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import { motion, Variants } from "framer-motion";
-import { useForm, SubmitHandler } from "react-hook-form"; // For form management
+import { useForm, SubmitHandler } from "react-hook-form";
 import {
   EnvelopeIcon,
   PhoneIcon,
   ChatBubbleLeftRightIcon,
   CheckCircleIcon,
   ExclamationCircleIcon,
-} from "@heroicons/react/24/outline"; // Icons
-import { SocialIcon } from "react-social-icons"; // For social media icons
-import socialLinks from "../data/socialLinks"; // Import social links data
+} from "@heroicons/react/24/outline";
+import { SocialIcon } from "react-social-icons";
+import socialLinks from "../data/socialLinks";
 
-// Define the shape of the form data
 interface IContactFormInputs {
   name: string;
   email: string;
@@ -19,9 +18,7 @@ interface IContactFormInputs {
   message: string;
 }
 
-// Animation variants for the page container
 const pageVariants: Variants = {
-  // <-- Add : Variants here
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
@@ -35,9 +32,7 @@ const pageVariants: Variants = {
   },
 };
 
-// Animation variants for individual form fields/contact items
 const itemVariants: Variants = {
-  // <-- Add : Variants here
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0 },
 };
@@ -54,7 +49,6 @@ const ContactPage: React.FC = () => {
   >("idle");
   const [message, setMessage] = useState<string>("");
 
-  // Function to encode form data for Netlify Forms
   const encode = (data: Record<string, string>) => {
     return Object.keys(data)
       .map(
@@ -64,16 +58,14 @@ const ContactPage: React.FC = () => {
   };
 
   const onSubmit: SubmitHandler<IContactFormInputs> = async (data) => {
-    setSubmissionStatus("idle"); // Reset status on new submission
+    setSubmissionStatus("idle");
     setMessage("");
 
     try {
-      // Netlify Forms requires a specific POST request
       const response = await fetch("/", {
-        // The form's action is usually just '/' for Netlify
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: encode({ "form-name": "contact", ...data }), // 'form-name' must match your form's name attribute
+        body: encode({ "form-name": "contact", ...data }),
       });
 
       if (response.ok) {
@@ -81,7 +73,7 @@ const ContactPage: React.FC = () => {
         setMessage(
           "Your message has been sent successfully! I will get back to you soon."
         );
-        reset(); // Reset form fields
+        reset();
       } else {
         setSubmissionStatus("error");
         setMessage(
@@ -97,7 +89,7 @@ const ContactPage: React.FC = () => {
 
   return (
     <motion.div
-      className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20"
+      className="py-12 md:py-20" // Padding handled by main in App.tsx
       initial="hidden"
       animate="visible"
       variants={pageVariants}
@@ -118,41 +110,53 @@ const ContactPage: React.FC = () => {
         links provided.
       </motion.p>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 bg-light-card dark:bg-dark-card p-8 rounded-lg shadow-lg">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 bg-light-card dark:bg-dark-card p-6 sm:p-8 rounded-lg shadow-lg">
+        {" "}
+        {/* Responsive gap and padding */}
         {/* Direct Contact Information */}
         <motion.div className="flex flex-col space-y-6" variants={itemVariants}>
-          <h3 className="text-3xl font-heading font-semibold text-accent-500 mb-4">
+          <h3 className="text-2xl sm:text-3xl font-heading font-semibold text-accent-500 mb-4">
             Contact Details
           </h3>
 
-          <div className="flex items-center space-x-4 text-lg text-light-text dark:text-dark-text">
-            <EnvelopeIcon className="h-7 w-7 text-accent-500" />
+          <div className="flex items-center space-x-4 text-base sm:text-lg text-light-text dark:text-dark-text">
+            {" "}
+            {/* Responsive text size */}
+            <EnvelopeIcon className="h-6 w-6 sm:h-7 sm:w-7 text-accent-500" />{" "}
+            {/* Responsive icon size */}
             <a
               href="mailto:abhishek.gupta.dev@example.com"
               className="hover:text-accent-600 transition-colors duration-200"
             >
-              abhishek.gupta.dev@example.com{" "}
-              {/* Replace with Abhishek's actual email */}
+              abhishek.gupta.dev@example.com
             </a>
           </div>
 
-          <div className="flex items-center space-x-4 text-lg text-light-text dark:text-dark-text">
-            <PhoneIcon className="h-7 w-7 text-accent-500" />
+          <div className="flex items-center space-x-4 text-base sm:text-lg text-light-text dark:text-dark-text">
+            {" "}
+            {/* Responsive text size */}
+            <PhoneIcon className="h-6 w-6 sm:h-7 sm:w-7 text-accent-500" />{" "}
+            {/* Responsive icon size */}
             <a
               href="tel:+91XXXXXXXXXX"
               className="hover:text-accent-600 transition-colors duration-200"
             >
-              +91 XXXXXXXXXX {/* Replace with Abhishek's actual phone number */}
+              +91 XXXXXXXXXX
             </a>
           </div>
 
-          <div className="flex items-center space-x-4 text-lg text-light-text dark:text-dark-text">
-            <ChatBubbleLeftRightIcon className="h-7 w-7 text-accent-500" />
+          <div className="flex items-center space-x-4 text-base sm:text-lg text-light-text dark:text-dark-text">
+            {" "}
+            {/* Responsive text size */}
+            <ChatBubbleLeftRightIcon className="h-6 w-6 sm:h-7 sm:w-7 text-accent-500" />{" "}
+            {/* Responsive icon size */}
             <span>Let's connect on social media:</span>
           </div>
 
           {/* Social Media Icons */}
-          <div className="flex space-x-4 mt-2">
+          <div className="flex flex-wrap gap-4 mt-2">
+            {" "}
+            {/* Added flex-wrap for mobile */}
             {socialLinks.map((link) => (
               <SocialIcon
                 key={link.name}
@@ -161,26 +165,25 @@ const ContactPage: React.FC = () => {
                 rel="noopener noreferrer"
                 fgColor="currentColor"
                 bgColor="transparent"
-                className="!h-10 !w-10 text-light-text dark:text-dark-text hover:text-accent-500 transition-colors duration-200 transform hover:scale-110"
+                className="!h-9 !w-9 sm:!h-10 sm:!w-10 text-light-text dark:text-dark-text hover:text-accent-500 transition-colors duration-200 transform hover:scale-110" // Responsive size
               />
             ))}
           </div>
         </motion.div>
-
         {/* Contact Form */}
         <motion.div variants={itemVariants}>
-          <h3 className="text-3xl font-heading font-semibold text-accent-500 mb-4">
+          <h3 className="text-2xl sm:text-3xl font-heading font-semibold text-accent-500 mb-4">
             Send a Message
           </h3>
           <form
-            name="contact" // IMPORTANT: This 'name' attribute is crucial for Netlify Forms
+            name="contact"
             method="POST"
-            data-netlify="true" // IMPORTANT: This attribute tells Netlify to process the form
-            data-netlify-honeypot="bot-field" // IMPORTANT: Honeypot for spam prevention
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
             onSubmit={handleSubmit(onSubmit)}
             className="space-y-6"
           >
-            {/* Honeypot field (hidden from users, helps prevent spam) */}
+            {/* Honeypot field */}
             <p className="hidden">
               <label>
                 Don’t fill this out if you’re human: <input name="bot-field" />
@@ -191,8 +194,10 @@ const ContactPage: React.FC = () => {
             <div>
               <label
                 htmlFor="name"
-                className="block text-md font-medium text-light-text dark:text-dark-text mb-2"
+                className="block text-sm sm:text-md font-medium text-light-text dark:text-dark-text mb-2"
               >
+                {" "}
+                {/* Responsive label size */}
                 Your Name
               </label>
               <input
@@ -206,21 +211,22 @@ const ContactPage: React.FC = () => {
                                 : "border-light-border dark:border-dark-border"
                             }
                             focus:ring-2 focus:ring-accent-500 focus:border-transparent
-                            text-light-text dark:text-dark-text`}
+                            text-base sm:text-lg text-light-text dark:text-dark-text`} // Responsive input text size
                 placeholder="John Doe"
               />
               {errors.name && (
-                <p className="text-red-500 text-sm mt-1">
+                <p className="text-xs sm:text-sm text-red-500 mt-1">
                   {errors.name.message}
                 </p>
-              )}
+              )}{" "}
+              {/* Responsive error text size */}
             </div>
 
             {/* Email Field */}
             <div>
               <label
                 htmlFor="email"
-                className="block text-md font-medium text-light-text dark:text-dark-text mb-2"
+                className="block text-sm sm:text-md font-medium text-light-text dark:text-dark-text mb-2"
               >
                 Your Email
               </label>
@@ -241,11 +247,11 @@ const ContactPage: React.FC = () => {
                                 : "border-light-border dark:border-dark-border"
                             }
                             focus:ring-2 focus:ring-accent-500 focus:border-transparent
-                            text-light-text dark:text-dark-text`}
+                            text-base sm:text-lg text-light-text dark:text-dark-text`}
                 placeholder="you@example.com"
               />
               {errors.email && (
-                <p className="text-red-500 text-sm mt-1">
+                <p className="text-xs sm:text-sm text-red-500 mt-1">
                   {errors.email.message}
                 </p>
               )}
@@ -255,7 +261,7 @@ const ContactPage: React.FC = () => {
             <div>
               <label
                 htmlFor="subject"
-                className="block text-md font-medium text-light-text dark:text-dark-text mb-2"
+                className="block text-sm sm:text-md font-medium text-light-text dark:text-dark-text mb-2"
               >
                 Subject
               </label>
@@ -270,11 +276,11 @@ const ContactPage: React.FC = () => {
                                 : "border-light-border dark:border-dark-border"
                             }
                             focus:ring-2 focus:ring-accent-500 focus:border-transparent
-                            text-light-text dark:text-dark-text`}
+                            text-base sm:text-lg text-light-text dark:text-dark-text`}
                 placeholder="Regarding a project opportunity..."
               />
               {errors.subject && (
-                <p className="text-red-500 text-sm mt-1">
+                <p className="text-xs sm:text-sm text-red-500 mt-1">
                   {errors.subject.message}
                 </p>
               )}
@@ -284,7 +290,7 @@ const ContactPage: React.FC = () => {
             <div>
               <label
                 htmlFor="message"
-                className="block text-md font-medium text-light-text dark:text-dark-text mb-2"
+                className="block text-sm sm:text-md font-medium text-light-text dark:text-dark-text mb-2"
               >
                 Your Message
               </label>
@@ -299,11 +305,11 @@ const ContactPage: React.FC = () => {
                                 : "border-light-border dark:border-dark-border"
                             }
                             focus:ring-2 focus:ring-accent-500 focus:border-transparent
-                            text-light-text dark:text-dark-text resize-y`}
+                            text-base sm:text-lg text-light-text dark:text-dark-text resize-y`}
                 placeholder="Hi Abhishek, I'd like to discuss..."
               ></textarea>
               {errors.message && (
-                <p className="text-red-500 text-sm mt-1">
+                <p className="text-xs sm:text-sm text-red-500 mt-1">
                   {errors.message.message}
                 </p>
               )}
@@ -333,7 +339,7 @@ const ContactPage: React.FC = () => {
             {/* Submit Button */}
             <button
               type="submit"
-              disabled={isSubmitting} // Disable button while submitting
+              disabled={isSubmitting}
               className="w-full px-8 py-3 rounded-lg bg-accent-500 text-white font-bold text-lg
                          hover:bg-accent-600 transition-colors duration-300 transform hover:scale-105
                          disabled:opacity-50 disabled:cursor-not-allowed"

@@ -1,31 +1,28 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import ToggleSwitch from "../ToggleSwitch/ToggleSwitch"; // Assuming this handles theme toggle
-import { useScrollDirection } from "../../hooks/useScrollDirection"; // Custom hook for scroll direction
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
+import { useScrollDirection } from "../../hooks/useScrollDirection"; // Keep this for dynamic background
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const scrollDirection = useScrollDirection(); // Re-introduce this hook
+  const scrollDirection = useScrollDirection();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
-  // Determine the background classes based on scroll direction
   const navbarBackgroundClasses =
-    scrollDirection === "none" // 'none' means at the very top of the page
-      ? "bg-transparent" // Transparent at the very top
-      : "bg-light-card/90 dark:bg-dark-card/90 shadow-md backdrop-blur-sm"; // Opaque with blur on scroll
+    scrollDirection === "none"
+      ? "bg-transparent"
+      : "bg-light-card/90 dark:bg-dark-card/90 shadow-md backdrop-blur-sm";
 
-  // Determine border classes based on scroll direction (only show border when scrolled)
   const navbarBorderClasses =
     scrollDirection === "none"
-      ? "" // No border when at the very top
-      : "border-b border-light-border dark:border-dark-border"; // Border when scrolled
+      ? ""
+      : "border-b border-light-border dark:border-dark-border";
 
   return (
-    // Navbar container: Fixed at top, dynamic background and border
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navbarBackgroundClasses} ${navbarBorderClasses}`}
     >
@@ -64,13 +61,12 @@ const Navbar: React.FC = () => {
           >
             Contact
           </Link>
-          <ToggleSwitch /> {/* Theme toggle for desktop */}
+          <ToggleSwitch />
         </div>
 
         {/* Mobile Menu Button (Hamburger) and Toggle Switch */}
         <div className="md:hidden flex items-center space-x-4">
-          <ToggleSwitch className="flex-shrink-0" />{" "}
-          {/* Theme toggle for mobile */}
+          <ToggleSwitch className="flex-shrink-0" />
           <button
             onClick={toggleMenu}
             className="text-light-text dark:text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-500 rounded p-1"
