@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
         {/* Logo/Brand */}
         <Link
           to="/"
-          className="text-2xl font-bold text-accent-500 hover:text-accent-600 transition-colors duration-200"
+          className="text-2xl font-bold text-accent-500 hover:text-accent-600 transition-colors duration-200 flex-shrink-0"
         >
           Abhishek
         </Link>
@@ -61,12 +61,15 @@ const Navbar: React.FC = () => {
           <ToggleSwitch /> {/* Theme toggle for desktop */}
         </div>
 
-        {/* Mobile Menu Button (Hamburger) */}
-        <div className="md:hidden flex items-center">
-          <ToggleSwitch className="mr-4" /> {/* Theme toggle for mobile */}
+        {/* Mobile Menu Button (Hamburger) and Toggle Switch */}
+        <div className="md:hidden flex items-center space-x-4">
+          {" "}
+          {/* Added space-x-4 for spacing */}
+          <ToggleSwitch className="flex-shrink-0" />{" "}
+          {/* Theme toggle for mobile */}
           <button
             onClick={toggleMenu}
-            className="text-light-text dark:text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-500 rounded"
+            className="text-light-text dark:text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-500 rounded p-1" // Added padding to button
             aria-label="Toggle mobile menu"
           >
             {isOpen ? (
@@ -85,32 +88,32 @@ const Navbar: React.FC = () => {
             <Link
               to="/"
               className="text-light-text dark:text-dark-text hover:text-accent-500 transition-colors duration-200 text-lg font-medium py-2 w-full text-center"
-              onClick={toggleMenu}
+              onClick={toggleMenu} // Close menu on click
             >
               Home
             </Link>
             <Link
               to="/projects"
               className="text-light-text dark:text-dark-text hover:text-accent-500 transition-colors duration-200 text-lg font-medium py-2 w-full text-center"
-              onClick={toggleMenu}
+              onClick={toggleMenu} // Close menu on click
             >
               Projects
             </Link>
             <Link
               to="/certifications"
               className="text-light-text dark:text-dark-text hover:text-accent-500 transition-colors duration-200 text-lg font-medium py-2 w-full text-center"
-              onClick={toggleMenu}
+              onClick={toggleMenu} // Close menu on click
             >
               Certifications
             </Link>
             <Link
               to="/contact"
               className="text-light-text dark:text-dark-text hover:text-accent-500 transition-colors duration-200 text-lg font-medium py-2 w-full text-center"
-              onClick={toggleMenu}
+              onClick={toggleMenu} // Close menu on click
             >
               Contact
             </Link>
-            {/* Theme toggle is already outside the menu for better access on mobile */}
+            {/* The ToggleSwitch is already outside the mobile menu dropdown for better visibility and access */}
           </div>
         </div>
       )}
