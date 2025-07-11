@@ -16,9 +16,9 @@ const projects: IProject[] = [
       "Spring Security",
       "React.js",
     ],
-    githubLink: "https://github.com/AbhishekGupta/ecommerce-website", // Replace with actual GitHub link
-    liveDemoLink: "https://ecommerce.abhishekgupta.dev", // Replace with actual live demo link (if exists)
-    image: "/assets/images/ecommerce-website.png", // Path to project screenshot
+    githubLink: "https://github.com/abhishekg-21", // Replace with actual GitHub link
+    liveDemoLink: "https://e-shop-frontend-eta.vercel.app/", // Replace with actual live demo link (if exists)
+    image: "C:Usersabhisabhishek-portfoliosrcdataE-Shop.png", // Path to project screenshot
   },
   {
     id: "qr-code-lms-module",
@@ -34,9 +34,9 @@ const projects: IProject[] = [
       "CSS",
       "JavaScript",
     ],
-    githubLink: "https://github.com/AbhishekGupta/qr-lms-module", // Replace with actual GitHub link
-    liveDemoLink: "https://qrlms.abhishekgupta.dev", // Replace with actual live demo link (if exists)
-    image: "/assets/images/qr-lms-module.png", // Path to project screenshot
+    githubLink: "https://github.com/abhishekg-21", // Replace with actual GitHub link
+    liveDemoLink: "https://scans-gold.vercel.app/", // Replace with actual live demo link (if exists)
+    image: "C:Usersabhisabhishek-portfoliosrcdataLMS.png", // Path to project screenshot
   },
   // Add more projects as Abhishek develops them
   // {
