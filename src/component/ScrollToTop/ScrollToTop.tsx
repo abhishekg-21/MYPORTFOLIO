@@ -1,20 +1,27 @@
-import React, { useState, useEffect } from "react";
-import { ChevronUpIcon } from "@heroicons/react/24/outline"; // Example icon
+import React, { useState, useEffect, useCallback } from "react"; // Import useCallback
+import { ChevronUpIcon } from "@heroicons/react/24/outline";
 
-interface ScrollToTopProps {
-  threshold?: number; // Scroll position to show button
-}
-
-const ScrollToTop: React.FC<ScrollToTopProps> = ({ threshold = 300 }) => {
+const ScrollToTop: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
 
-  const toggleVisibility = () => {
-    if (window.pageYOffset > threshold) {
+  // Use useCallback to memoize toggleVisibility
+  const toggleVisibility = useCallback(() => {
+    if (window.scrollY > 300) {
+      // Show button after scrolling 300px
       setIsVisible(true);
     } else {
       setIsVisible(false);
     }
-  };
+  }, []); // No dependencies for toggleVisibility as it only uses stable window and setIsVisible
+
+  useEffect(() => {
+    window.addEventListener("scroll", toggleVisibility);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("scroll", toggleVisibility);
+    };
+  }, [toggleVisibility]); // <--- FIX: Added toggleVisibility to the dependency array
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -23,26 +30,19 @@ const ScrollToTop: React.FC<ScrollToTopProps> = ({ threshold = 300 }) => {
     });
   };
 
-  useEffect(() => {
-    window.addEventListener("scroll", toggleVisibility);
-    return () => window.removeEventListener("scroll", toggleVisibility);
-  }, []);
-
   return (
-    <div className="fixed bottom-8 right-8 z-40">
-      {isVisible && (
-        <button
-          onClick={scrollToTop}
-          className="bg-accent-500 text-white p-3 rounded-full shadow-lg
-                     hover:bg-accent-600 transition-colors duration-300
-                     focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
-          aria-label="Scroll to top"
-        >
-          <ChevronUpIcon className="h-6 w-6" />
-        </button>
-      )}
-    </div>
+    <button
+      onClick={scrollToTop}
+      className={`fixed bottom-8 right-8 p-3 rounded-full bg-accent-500 text-white shadow-lg
+                  transition-opacity duration-300 z-40
+                  ${
+                    isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
+                  }`}
+      aria-label="Scroll to top"
+    >
+      <ChevronUpIcon className="h-6 w-6" />
+    </button>
   );
 };
 
-export default ScrollToTop; // <-- ADDED EXPORT
+export default ScrollToTop;
