@@ -38,7 +38,7 @@ const Home: React.FC = () => {
   };
 
   const handleDownloadCV = () => {
-    const resumeUrl = "../assets/Abhishek_Gupta_Resume.pdf";
+    const resumeUrl = "/assets/Abhishek_Gupta_Resume.pdf";
     window.open(resumeUrl, "_blank");
   };
 
