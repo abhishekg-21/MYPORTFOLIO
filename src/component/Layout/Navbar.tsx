@@ -5,26 +5,29 @@ import ToggleSwitch from "../ToggleSwitch/ToggleSwitch"; // Assuming this handle
 import { useScrollDirection } from "../../hooks/useScrollDirection"; // Custom hook for scroll direction
 
 const Navbar: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false); // State for mobile menu visibility
-  const scrollDirection = useScrollDirection(); // Get scroll direction for dynamic navbar
+  const [isOpen, setIsOpen] = useState(false);
+  const scrollDirection = useScrollDirection(); // Re-introduce this hook
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
+  // Determine the background classes based on scroll direction
+  const navbarBackgroundClasses =
+    scrollDirection === "none" // 'none' means at the very top of the page
+      ? "bg-transparent" // Transparent at the very top
+      : "bg-light-card/90 dark:bg-dark-card/90 shadow-md backdrop-blur-sm"; // Opaque with blur on scroll
+
+  // Determine border classes based on scroll direction (only show border when scrolled)
+  const navbarBorderClasses =
+    scrollDirection === "none"
+      ? "" // No border when at the very top
+      : "border-b border-light-border dark:border-dark-border"; // Border when scrolled
+
   return (
-    // Navbar container: Fixed at top, dynamic background based on scroll
+    // Navbar container: Fixed at top, dynamic background and border
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        // Conditional class for hiding/showing on scroll (if you want this behavior back)
-        // For 'never move', simply remove this line:
-        scrollDirection === "down" ? "-translate-y-full" : "translate-y-0"
-      } ${
-        // Conditional background: transparent at top, opaque with blur on scroll
-        scrollDirection === "none"
-          ? "bg-transparent" // Transparent when not scrolled
-          : "bg-light-card/90 dark:bg-dark-card/90 shadow-md backdrop-blur-sm" // Opaque with blur on scroll
-      } border-b border-light-border dark:border-dark-border`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navbarBackgroundClasses} ${navbarBorderClasses}`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
         {/* Logo/Brand */}
