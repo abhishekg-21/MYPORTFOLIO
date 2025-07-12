@@ -63,7 +63,7 @@ const Home: React.FC = () => {
           variants={itemVariants}
         >
           <img
-            src="/assets/profile_pic.jpg" // CHANGE THIS TO YOUR ACTUAL PROFILE PICTURE PATH
+            src="https://res.cloudinary.com/daf3uusqd/image/upload/v1752350151/WhatsApp_Image_2025-06-12_at_12.31.29_PM-removebg-preview_k4bxcj.png" // CHANGE THIS TO YOUR ACTUAL PROFILE PICTURE PATH
             alt="Abhishek Gupta"
             className="w-full h-full object-cover"
           />
