@@ -36,7 +36,7 @@ const projects: IProject[] = [
       "JavaScript",
     ],
     githubLink: "https://github.com/abhishekg-21", // Replace with actual GitHub link
-    liveDemoLink: "https://scans-gold.vercel.app/", // Replace with actual live demo link (if exists)
+    liveDemoLink: "https://qr-based-book-borrow-return-system.vercel.app/", // Replace with actual live demo link (if exists)
     image:
       "https://res.cloudinary.com/daf3uusqd/image/upload/v1752266023/LMS_zqq8yg.png", // Path to project screenshot
   },

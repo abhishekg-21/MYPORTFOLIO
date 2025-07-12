@@ -91,7 +91,12 @@ const skills: ISkill[] = [
     category: "Tools",
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg",
   },
-  { id: "git", name: "Git", category: "Tools", icon: "/assets/icons/git.svg" },
+  {
+    id: "git",
+    name: "Git",
+    category: "Tools",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg",
+  },
   {
     id: "netlify",
     name: "Netlify",
